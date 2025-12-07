@@ -1,0 +1,14 @@
+@import "tailwindcss";
+
+@layer base {
+    html {
+        font-family: 'Inter', system-ui, sans-serif;
+    }
+
+    body {
+        font-family: 'Inter', system-ui, sans-serif;
+        
+    }
+}
+
+@config "../tailwind.config.js";
