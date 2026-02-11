@@ -9,7 +9,7 @@ export interface Task {
   assignedTo: string
 }
 
-export const generateTasks = (min: number = 1, max: number = 5): Task[] => {
+export const generateTasks = (min: number = 3, max: number = 9): Task[] => {
   const count = Math.floor(Math.random() * (max - min + 1)) + min;
   
   return Array.from({ length: count }, () => ({
@@ -22,4 +22,4 @@ export const generateTasks = (min: number = 1, max: number = 5): Task[] => {
   }));
 }
 
-export const mockTasks = generateTasks(1, 5);
+export const mockTasks = generateTasks();

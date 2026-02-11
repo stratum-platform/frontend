@@ -1,39 +1,106 @@
+import { useLocation } from 'react-router-dom'
 import { mockUser } from '../../../mocks/dashboard/user'
 
 export function Header() {
+
+  const location = useLocation()
+
+  const getPageTitle = (pathname: string) => {
+    switch(pathname) {
+      case '/':
+      case '':
+        return 'Начальная страница'
+      case '/tasks':
+        return 'Задачи'
+      case '/personal':
+        return 'Личный кабинет'
+      case '/knowledge':
+        return 'База знаний'
+      case '/courses':
+        return 'Обучение'
+      case '/billing':
+        return 'Счета'
+      case '/settings':
+        return 'Настройка платформы'
+      default:
+        return 'Начальная страница'
+    }
+  }
+  
+  const pageTitle = getPageTitle(location.pathname)
+
   return (
-    <header className="bg-white shadow-md px-6 py-4">
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-xl font-semibold text-gray-900">
-            Начальная страница
-          </h1>
-        </div>
-        
-        <div className="flex items-center space-x-4">
-          <button className="relative p-2">
-            <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
-            </svg>
-            {mockUser.notifications > 0 && (
-              <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                {mockUser.notifications}
-              </span>
-            )}
-          </button>
-          
-          <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center text-white font-semibold">
-              {mockUser.firstName[0]}{mockUser.lastName[0]}
+    <header className="header">
+        <button className="menu-toggle">☰</button>
+        <h1>{pageTitle}</h1>
+
+        <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '1.25rem'
+        }}>
+            <input 
+                type="search"
+                placeholder="Поиск по модулям..."
+                style={{
+                    width: '15rem',
+                    padding: '0.5rem 1rem',
+                    border: '1px solid var(--gray-300)',
+                    borderRadius: '6px'
+                }} />
+
+            <div style={{
+                position: 'relative',
+                cursor: 'pointer'
+            }}>
+                <span style={{ fontSize: '1.5rem' }}>🔔</span>
+                {mockUser.notifications > 0 && (
+                  <span style={{
+                    position: 'absolute',
+                    top: '-0.4rem',
+                    right: '-0.4rem',
+                    background: 'var(--red-500)',
+                    color: 'white',
+                    fontSize: '0.65rem',
+                    fontWeight: 'bold',
+                    padding: '0.1rem 0.4rem',
+                    borderRadius: '999px'
+                  }}>
+                    {mockUser.notifications}
+                  </span>
+                )}
             </div>
-            
-            <div>
-              <p className="font-medium text-gray-900">{mockUser.fullName}</p>
-              <p className="text-sm text-gray-500">{mockUser.position}</p>
+
+            <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.75rem',
+                cursor: 'pointer'
+            }}>
+                <div style={{
+                    width: '2.5rem',
+                    height: '2.5rem',
+                    background: '#3b82f6',
+                    borderRadius: '999px',
+                    color: 'white',
+                    fontWeight: 600,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                }}>
+                    <div className="profile-avatar" style={{ 
+                        backgroundImage: "url('/src/assets/img/ava.jpg')"
+                    }}></div>
+                </div>
+                <div>
+                    <div style={{ fontWeight: 500 }}>{mockUser.fullName}</div>
+                    <div style={{
+                        fontSize: '0.875rem',
+                        color: 'var(--gray-500)'
+                    }}>{mockUser.position}</div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
     </header>
   )
 }

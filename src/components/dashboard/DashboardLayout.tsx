@@ -1,27 +1,23 @@
+import { Outlet } from 'react-router-dom'
 import { Sidebar } from './Sidebar/Sidebar'
 import { Header } from './Header/Header'
+import { Footer } from './Footer/Footer'
 import { MainContent } from './MainContent/MainContent'
 
-interface DashboardLayoutProps {
-  children?: React.ReactNode
-}
-
-export function DashboardLayout({ children }: DashboardLayoutProps) {
+export function DashboardLayout() {
   return (
-    <div className="min-h-screen">
-      <div className="flex">
-        <div className="w-64">
-          <Sidebar />
-        </div>
-        
-        <div className="flex-1">
-          <Header />
-          
-          <MainContent>
-            {children}
-          </MainContent>
-        </div>
+    <div className="container">
+
+      <Sidebar />
+      
+      <div className="main-content">
+        <Header />
+        <MainContent>
+          <Outlet />
+          <Footer />
+        </MainContent>
       </div>
+      
     </div>
   )
 }
