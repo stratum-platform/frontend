@@ -1,6 +1,41 @@
 import { NavLink } from 'react-router-dom'
+import { useState, useEffect, useRef } from 'react';
 
 export function Sidebar() {
+  const [isCollapsed, setIsCollapsed] = useState(() => {
+    // Вычисляется только один раз при монтировании
+    const savedState = localStorage.getItem('sidebarState');
+    return savedState === 'collapsed';
+  });
+  
+  const [isActive, setIsActive] = useState(false);
+  const sidebarRef = useRef<HTMLElement>(null);
+  const menuToggleRef = useRef<HTMLButtonElement>(null);
+
+  const toggleCollapse = () => {
+    setIsCollapsed(prev => {
+      const newState = !prev;
+      localStorage.setItem('sidebarState', newState ? 'collapsed' : 'expanded');
+      return newState;
+    });
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (window.innerWidth >= 1024) return;
+      
+      if (sidebarRef.current && 
+          menuToggleRef.current && 
+          !sidebarRef.current.contains(event.target as Node) && 
+          !menuToggleRef.current.contains(event.target as Node)) {
+        setIsActive(false);
+      }
+    };
+
+    document.addEventListener('click', handleClickOutside);
+    return () => document.removeEventListener('click', handleClickOutside);
+  }, []);
+
   const menuItems = [
     { 
       label: 'Начальная страница', 
@@ -71,15 +106,15 @@ export function Sidebar() {
 
     
   return (
-    <aside className="sidebar" id="sidebar">
-        <button className="toggle-sidebar-btn" title="Свернуть/развернуть">
+    <aside id="sidebar" ref={sidebarRef} className={`sidebar ${isCollapsed ? 'collapsed' : ''} ${isActive ? 'active' : ''}`} >
+        <button className="toggle-sidebar-btn" title="Свернуть/развернуть" onClick={toggleCollapse}>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                 <polyline points="15 18 9 12 15 6"></polyline>
             </svg>
         </button>
 
         <div className="profile-block">
-            <div className="profile-avatar"></div>
+            <div className="profile-avatar" style={{backgroundImage: 'url(/src/assets/img/user-avatar.jpg)' }}></div>
             <div className="nav-text logo-text">Archstone</div>
         </div>
 

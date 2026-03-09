@@ -15,7 +15,9 @@ export function Header() {
       case '/personal':
         return 'Личный кабинет'
       case '/knowledge':
-        return 'База знаний'
+        return 'База знаний - главная'
+      case '/knowledge/categories':
+        return 'База знаний - поиск'
       case '/courses':
         return 'Обучение'
       case '/billing':

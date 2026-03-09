@@ -7,7 +7,7 @@ import { TasksPage } from './pages/tasks/TasksPage'
 import { BillingPage } from './pages/billing/BillingPage'
 import { SettingsPage } from './pages/settings/SettingsPage'
 import { PersonalPage } from './pages/personal/PersonalPage'
-import { KnowledgePage } from './pages/knowledge/KnowledgePage'
+import { KnowledgeOverviewPage, KnowledgeCategoriesPage } from './pages/knowledge';
 import { CoursesPage } from './pages/courses/CoursesPage'
 
 function App() {
@@ -26,7 +26,8 @@ function App() {
           <Route path="billing" element={<BillingPage />} />
           <Route path="settings" element={<SettingsPage />} />
           <Route path="personal" element={<PersonalPage />} />
-          <Route path="knowledge" element={<KnowledgePage />} />
+          <Route path="knowledge" element={<KnowledgeOverviewPage  />} />
+          <Route path="/knowledge/categories" element={<KnowledgeCategoriesPage />} />
           <Route path="courses" element={<CoursesPage />} />
         </Route>
       </Routes>
