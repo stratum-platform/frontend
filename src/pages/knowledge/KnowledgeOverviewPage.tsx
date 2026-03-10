@@ -6,16 +6,18 @@ import { WelcomeCard } from '../../components/knowledge/department/WelcomeCard';
 import { SearchBar } from '../../components/knowledge/search-filter/SearchBar';
 import type { ViewMode } from '../../components/knowledge/layout/KnowledgeLayout.types';
 import type { NavTabId } from '../../components/knowledge/navigation/NavTabs.types';
+import { useNavigate } from 'react-router-dom';
 
 export const KnowledgeOverviewPage = () => {
+    const navigate = useNavigate();
     const [activeTab, setActiveTab] = useState<NavTabId>('overview');
     const [activeDepartment, setActiveDepartment] = useState('development');
     const [viewMode, setViewMode] = useState<ViewMode>('grid');
     const [searchQuery, setSearchQuery] = useState('');
 
     const tabs = [
-        { id: 'overview' as const, label: 'Обзор', icon: 'fa-chart-pie', href: '/knowledge' },
-        { id: 'categories' as const, label: 'Категории и статьи', icon: 'fa-sitemap', href: '/knowledge/categories' }
+        { id: 'overview' as const, label: 'Обзор', icon: 'fa-chart-pie', href: 'knowledge' },
+        { id: 'categories' as const, label: 'Категории и статьи', icon: 'fa-sitemap', href: 'knowledge/categories' }
     ];
 
     const departments = [
@@ -29,7 +31,7 @@ export const KnowledgeOverviewPage = () => {
     const handleTabChange = (tabId: NavTabId) => {
         setActiveTab(tabId);
         if (tabId === 'categories') {
-            window.location.href = '/knowledge/categories';
+            navigate('/knowledge/categories');
         }
     };
 

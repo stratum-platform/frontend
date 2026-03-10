@@ -26,8 +26,10 @@ function App() {
           <Route path="billing" element={<BillingPage />} />
           <Route path="settings" element={<SettingsPage />} />
           <Route path="personal" element={<PersonalPage />} />
-          <Route path="knowledge" element={<KnowledgeOverviewPage  />} />
-          <Route path="knowledge/categories" element={<KnowledgeCategoriesPage />} />
+          <Route path="knowledge">
+            <Route index element={<KnowledgeOverviewPage />} />
+            <Route path="categories" element={<KnowledgeCategoriesPage />} />
+          </Route>
           <Route path="courses" element={<CoursesPage />} />
         </Route>
       </Routes>

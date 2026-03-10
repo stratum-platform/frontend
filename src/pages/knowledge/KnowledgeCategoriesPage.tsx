@@ -13,6 +13,7 @@ import type { ViewMode } from '../../components/knowledge/layout/KnowledgeLayout
 import type { NavTabId } from '../../components/knowledge/navigation/NavTabs.types';
 import type { AdvancedFiltersValues } from '../../components/knowledge/search-filter/AdvancedFilters.types';
 import type { Article } from '../../components/knowledge/articles/ArticleCard.types';
+import { useNavigate } from 'react-router-dom';
 
 const mockArticles: Article[] = [
     {
@@ -103,6 +104,7 @@ const categoryTree = [
 ];
 
 export const KnowledgeCategoriesPage = () => {
+    const navigate = useNavigate();
     const [activeTab, setActiveTab] = useState<NavTabId>('categories');
     const [activeDepartment, setActiveDepartment] = useState('development');
     const [viewMode, setViewMode] = useState<ViewMode>('grid');
@@ -125,8 +127,8 @@ export const KnowledgeCategoriesPage = () => {
     });
 
     const tabs = [
-        { id: 'overview' as const, label: 'Обзор', icon: 'fa-chart-pie', href: '/knowledge' },
-        { id: 'categories' as const, label: 'Категории и статьи', icon: 'fa-sitemap', href: '/knowledge/categories' }
+        { id: 'overview' as const, label: 'Обзор', icon: 'fa-chart-pie', href: 'knowledge' },
+        { id: 'categories' as const, label: 'Категории и статьи', icon: 'fa-sitemap', href: 'knowledge/categories' }
     ];
 
     const departments = [
@@ -186,7 +188,7 @@ export const KnowledgeCategoriesPage = () => {
     const handleTabChange = (tabId: NavTabId) => {
         setActiveTab(tabId);
         if (tabId === 'overview') {
-            window.location.href = '/knowledge';
+            navigate('/knowledge');
         }
     };
 
