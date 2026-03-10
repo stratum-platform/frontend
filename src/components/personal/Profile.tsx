@@ -1,4 +1,5 @@
 import { mockUser } from '../../mocks/dashboard/user'
+import avatarImg from '../../assets/img/ava.jpg';
 
 export function Profile() {
     const profileLinks = [
@@ -20,7 +21,7 @@ export function Profile() {
                 style={{ 
                     width: '80px', 
                     height: '80px', 
-                    backgroundImage: "url('/src/assets/img/ava.jpg')", 
+                    backgroundImage: `${avatarImg}`, 
                     borderRadius: '50%' 
                 }}
                 ></div>

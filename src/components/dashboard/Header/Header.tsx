@@ -1,5 +1,6 @@
 import { useLocation } from 'react-router-dom'
 import { mockUser } from '../../../mocks/dashboard/user'
+import avatarImg from '../../../assets/img/ava.jpg';
 
 export function Header() {
 
@@ -91,7 +92,7 @@ export function Header() {
                     justifyContent: 'center'
                 }}>
                     <div className="profile-avatar" style={{ 
-                        backgroundImage: "url('/src/assets/img/ava.jpg')"
+                        backgroundImage: `url(${avatarImg})`
                     }}></div>
                 </div>
                 <div>

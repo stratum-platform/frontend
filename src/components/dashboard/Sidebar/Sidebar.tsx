@@ -1,9 +1,11 @@
 import { NavLink } from 'react-router-dom'
 import { useState, useEffect, useRef } from 'react';
+import profileAvatar from '../../../assets/img/user-avatar.jpg';
+
 
 export function Sidebar() {
   const [isCollapsed, setIsCollapsed] = useState(() => {
-    // Вычисляется только один раз при монтировании
+
     const savedState = localStorage.getItem('sidebarState');
     return savedState === 'collapsed';
   });
@@ -114,7 +116,9 @@ export function Sidebar() {
         </button>
 
         <div className="profile-block">
-            <div className="profile-avatar" style={{backgroundImage: 'url(/src/assets/img/user-avatar.jpg)' }}></div>
+            <div className="profile-avatar" style={{ 
+                  backgroundImage: `url(${profileAvatar})`
+              }}></div>
             <div className="nav-text logo-text">Archstone</div>
         </div>
 
