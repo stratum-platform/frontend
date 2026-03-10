@@ -12,7 +12,7 @@ import { CoursesPage } from './pages/courses/CoursesPage'
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/frontend">
       <Routes>
         <Route path="/login" element={<LoginPage />} />
         
